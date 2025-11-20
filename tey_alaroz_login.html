@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tey AlArz - ورود به بازی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+        }
+
+        .remember-forget {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .remember-forget a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .remember-forget a:hover {
+            color: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-link {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .signup-link a:hover {
+            color: white;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: white;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="starsContainer"></div>
+
+    <div class="container">
+        <div class="logo">
+            <h1>🎮 Tey AlArz</h1>
+            <p>دنیای شگفت‌انگیز بازی منتظرت است</p>
+        </div>
+
+        <div class="success" id="successMsg">✓ ورود موفق! درحال انتقال به بازی...</div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">نام کاربری</label>
+                <input type="text" id="username" name="username" placeholder="نام کاربری خود را وارد کنید" required>
+                <div class="error" id="usernameError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">رمز عبور</label>
+                <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+
+            <div class="remember-forget">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember" style="margin: 0;">مرا به‌خاطر بسپار</label>
+                </div>
+                <a href="#">فراموشی رمز عبور؟</a>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>درحال بررسی اطلاعات...</p>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">ورود به بازی</button>
+        </form>
+
+        <div class="signup-link">
+            حساب کاربری ندارید؟ <a href="#" onclick="handleSignup(event)">ثبت‌نام کنید</a>
+        </div>
+    </div>
+
+    <script>
+        // تولید ستاره‌های شب
+        function generateStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        generateStars();
+
+        // شناخت فوری کاربران
+        const testUsers = {
+            'admin': 'admin123',
+            'player': 'player123',
+            'test': 'test123'
+        };
+
+        // ذخیره‌سازی تاریخچه ورودها
+        function saveLoginHistory(username) {
+            let history = JSON.parse(localStorage.getItem('loginHistory') || '[]');
+            history.push({
+                username: username,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('loginHistory', JSON.stringify(history));
+        }
+
+        // ذخیره‌سازی نام کاربری
+        function saveRememberedUser() {
+            const username = document.getElementById('username').value;
+            const remember = document.getElementById('remember').checked;
+            if (remember) {
+                localStorage.setItem('rememberedUser', username);
+            } else {
+                localStorage.removeItem('rememberedUser');
+            }
+        }
+
+        // بارگذاری نام کاربری محفوظ
+        window.addEventListener('load', () => {
+            const rememberedUser = localStorage.getItem('rememberedUser');
+            if (rememberedUser) {
+                document.getElementById('username').value = rememberedUser;
+                document.getElementById('remember').checked = true;
+            }
+        });
+
+        // معالجه‌ی فرم لاگین
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            const loading = document.getElementById('loading');
+
+            // تمام خطاهای قبلی را پاک کن
+            document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+
+            // تصدیق ورودی
+            if (!username) {
+                document.getElementById('usernameError').textContent = 'نام کاربری الزامی است';
+                document.getElementById('usernameError').style.display = 'block';
+                return;
+            }
+
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'رمز عبور الزامی است';
+                document.getElementById('passwordError').style.display = 'block';
+                return;
+            }
+
+            // نمایش لاگین‌شیپر
+            loginBtn.disabled = true;
+            loading.style.display = 'block';
+
+            // شبیه‌سازی درخواست سرور
+            setTimeout(() => {
+                if (testUsers[username] === password) {
+                    // ورود موفق
+                    saveRememberedUser();
+                    saveLoginHistory(username);
+
+                    const successMsg = document.getElementById('successMsg');
+                    successMsg.style.display = 'block';
+                    loading.style.display = 'none';
+
+                    // ذخیره اطلاعات کاربر
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        username: username,
+                        loginTime: new Date().toISOString()
+                    }));
+
+                    // انتقال به صفحه پروفیل
+                    setTimeout(() => {
+                        window.location.href = 'profile.html';
+                    }, 1500);
+                } else {
+                    // ورود ناموفق
+                    document.getElementById('passwordError').textContent = 'نام کاربری یا رمز عبور اشتباه است';
+                    document.getElementById('passwordError').style.display = 'block';
+                    loginBtn.disabled = false;
+                    loading.style.display = 'none';
+                }
+            }, 1500);
+        });
+
+        // معالجه‌ی ثبت‌نام
+        function handleSignup(e) {
+            e.preventDefault();
+            alert('صفحه ثبت‌نام در حال توسعه است!');
+        }
+
+        // اتصال با بازی (UE5)
+        // برای اتصال با Unreal Engine 5 یا بازی دیگر، می‌تونید از این تابع استفاده کنید:
+        window.openGameLogin = function() {
+            window.location.href = window.location.href;
+        };
+    </script>
+</body>
+</html>
