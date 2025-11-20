@@ -1,0 +1,8 @@
+{
+  "name": "simple-login-tey-alarz",
+  "version": "1.0.0",
+  "description": "Static login site for Vercel",
+  "scripts": {
+    "start": "echo \"Static site\""
+  }
+}
