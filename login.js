@@ -14,9 +14,9 @@ function doLogin(){
         return;
     }
 
-    if(users[u] && users[u] === p){
-        localStorage.setItem("currentUser", u);
-        window.location.href = "profile.html";
+     if(users[u] && users[u] === p){
+    localStorage.setItem("currentUser", u);
+    window.location.href = "success.html";
     } else {
         err.innerText = "Invalid credentials";
     }

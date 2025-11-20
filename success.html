@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Successful</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="cyber-bg">
+    <div class="profile-box">
+        <h2>Login Successful!</h2>
+        <p>You can return to the game now.</p>
+        <p>Logged in as: <span id="user"></span></p>
+        <button onclick="goBack()">Return to Game</button>
+    </div>
+
+    <script>
+        document.getElementById("user").innerText =
+            localStorage.getItem("currentUser") || "Unknown";
+
+        function goBack() {
+            window.close(); // closes the browser window
+        }
+    </script>
+</body>
+
+</html>
